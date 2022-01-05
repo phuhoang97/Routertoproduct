@@ -1,24 +1,58 @@
-import logo from './logo.svg';
-import './App.css';
+import Layout from "./conponent/Layout";
+import { useState } from "react";
+import "./App.css";
+// import Product from "./conponent/Product";
+import "antd/dist/antd.css";
+import { BrowserRouter, Route, Link } from "react-router-dom";
 
 function App() {
+  let [products, setProducts] = useState([
+    {
+      id: "1",
+      title: "Coca",
+      img: "https://sodafoods.com/wp-content/uploads/2019/11/Coca-Nh%E1%BA%ADt-Nh%C3%AD-160ml.jpg",
+      price: 20000,
+    },
+    {
+      id: "2",
+      title: "Pessi",
+      img: "https://cdn.tgdd.vn/Products/Images/2443/200476/bhx/combo-2-chai-nuoc-ngot-pepsi-cola-15-lit-202003171007491996.jpg",
+      price: 20000,
+    },
+    {
+      id: "3",
+      title: "Sting Vang",
+      img: "http://img.websosanh.vn/v2/users/root_product/images/nuoc-tang-luc-nhan-sam-sting/FqnmBQCH75tW.jpg",
+      price: 20000,
+    },
+    {
+      id: "4",
+      title: "Mountain Dew",
+      img: "https://product.hstatic.net/1000126467/product/nuoc-ngot-mountain-dew-chai-pet-390ml_grande.jpg",
+      price: 20000,
+    },
+    {
+      id: "5",
+      title: "Fanta",
+      img: "data:image/jpeg;base64,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",
+      price: 20000,
+    },
+    {
+      id: "6",
+      title: "Highland Coffee",
+      img: "https://cdn.tgdd.vn/Products/Images/8966/193095/bhx/ca-phe-sua-highlands-235ml-201903251338254805.jpg",
+      price: 20000,
+    },
+  ]);
+
+  let [cart, setCart] = useState([]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <div className="App">
+        <Layout products={products} cart={cart} setCart={setCart} />
+      </div>
+    </BrowserRouter>
   );
 }
 
