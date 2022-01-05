@@ -1,7 +1,6 @@
 import Layout from "./conponent/Layout";
 import { useState } from "react";
 import "./App.css";
-// import Product from "./conponent/Product";
 import "antd/dist/antd.css";
 import { BrowserRouter, Route, Link } from "react-router-dom";
 
